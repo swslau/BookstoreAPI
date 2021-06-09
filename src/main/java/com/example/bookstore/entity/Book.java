@@ -1,5 +1,6 @@
 package com.example.bookstore.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,14 +12,26 @@ import javax.persistence.Table;
 public class Book {
 	
 	@Id
+	@Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name = "isbn")
 	private String isbn;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "author")
 	private String author;
+	
+	@Column(name = "publisher")
 	private String publisher;
+	
+	@Column(name = "publish_year")
 	private int publishYear;
+	
+	@Column(name = "price")
 	private int price;
 	
 	public Book() {

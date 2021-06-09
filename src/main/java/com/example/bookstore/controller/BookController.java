@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.entity.Order;
 import com.example.bookstore.parameter.BookQueryParameter;
 import com.example.bookstore.service.BookRecordService;
+import com.example.bookstore.service.OrderService;
 
 @RestController
 @RequestMapping(value = "/books", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,6 +27,9 @@ public class BookController {
 	
 	@Autowired
 	private BookRecordService bookRecordService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@GetMapping
 	public ResponseEntity<List<Book>> getBooks(@ModelAttribute BookQueryParameter param){
@@ -50,6 +55,11 @@ public class BookController {
 	public ResponseEntity<Book> deleteOneBook(@PathVariable("id") int id){
 		bookRecordService.deleteBookRecord(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/order/{id}")
+	public ResponseEntity<Order> getOneOrder(@PathVariable("id") int id){
+		return ResponseEntity.ok().body(orderService.getOrder(id));
 	}
 
 }
